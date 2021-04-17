@@ -13,7 +13,7 @@ function TouchMeNotBase() {
     const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`});
 
     hands.setOptions({
-      maxNumHands: 2,
+      maxNumHands: 1,
       minDetectionConfidence: 0.5,
       minTrackingConfidence: 0.5
     });
@@ -63,9 +63,9 @@ function TouchMeNotBase() {
   }, []);
 
   return (
-    <>
-      <canvas ref={canvasRef} style={{transform: "scaleX(-1)"}}/>
-    </>
+    <div>
+      <canvas className="transform scale-x-minus-1" ref={canvasRef}/>
+    </div>
   );
 }
 
