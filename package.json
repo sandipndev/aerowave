@@ -4,6 +4,10 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.1",
+    "@mediapipe/camera_utils": "^0.1.1617146909",
+    "@mediapipe/control_utils": "^0.1.1617146970",
+    "@mediapipe/drawing_utils": "^0.2.1617146986",
+    "@mediapipe/hands": "^0.1.1617147326",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
