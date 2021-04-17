@@ -18,8 +18,8 @@ function TouchMeNotBase(props) {
 
     hands.setOptions({
       maxNumHands: 1,
-      minDetectionConfidence: 0.5,
-      minTrackingConfidence: 0.5
+      minDetectionConfidence: 0.3,
+      minTrackingConfidence: 0.3
     });
 
     const cnvs = canvasRef.current;
@@ -32,7 +32,9 @@ function TouchMeNotBase(props) {
 
       if (res.multiHandLandmarks) {
         for (const landmarks of res.multiHandLandmarks) {
-          props.setGesture(getGesture(landmarks));
+          const gx = getGesture(landmarks)
+          if (props.gesture !== gx) props.setGesture(gx);
+          
           props.setFingerLocx(landmarks);
 
           drawConnectors(ctx, landmarks, HAND_CONNECTIONS, { color: '#00FF00', lineWidth: 5 });
@@ -70,15 +72,19 @@ function TouchMeNotBase(props) {
   }, []);
 
   return (
-    <div>
+    <div className="absolute top-0">
       <canvas className="transform scale-x-minus-1" ref={canvasRef} />
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  gesture: state.hand.gesture
+});
 
 const mapDispatchToProps = (dispatch) => ({
   setGesture: (gesture) => dispatch(setGesture(gesture)),
   setFingerLocx: (gesture) => dispatch(setFingerLocx(gesture)),
 })
 
-export default connect(null, mapDispatchToProps)(TouchMeNotBase);
+export default connect(mapStateToProps, mapDispatchToProps)(TouchMeNotBase);
