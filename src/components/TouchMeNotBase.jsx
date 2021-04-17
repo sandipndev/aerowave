@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { connect } from "react-redux";
 
 import { Hands, HAND_CONNECTIONS } from "@mediapipe/hands/hands";
 
@@ -6,11 +7,14 @@ import { Camera } from "@mediapipe/camera_utils/camera_utils";
 import { drawConnectors, drawLandmarks } from "@mediapipe/drawing_utils/drawing_utils";
 import "@mediapipe/control_utils/control_utils";
 
-function TouchMeNotBase() {
+import { setGesture, setFingerLocx } from "../redux/gesture/gesture.actions";
+import getGesture from "../utils/getGesture";
+
+function TouchMeNotBase(props) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`});
+    const hands = new Hands({ locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}` });
 
     hands.setOptions({
       maxNumHands: 1,
@@ -28,6 +32,9 @@ function TouchMeNotBase() {
 
       if (res.multiHandLandmarks) {
         for (const landmarks of res.multiHandLandmarks) {
+          props.setGesture(getGesture(landmarks));
+          props.setFingerLocx(landmarks);
+
           drawConnectors(ctx, landmarks, HAND_CONNECTIONS, { color: '#00FF00', lineWidth: 5 });
           drawLandmarks(ctx, landmarks, { color: '#FF0000', lineWidth: 2 });
         }
@@ -64,9 +71,14 @@ function TouchMeNotBase() {
 
   return (
     <div>
-      <canvas className="transform scale-x-minus-1" ref={canvasRef}/>
+      <canvas className="transform scale-x-minus-1" ref={canvasRef} />
     </div>
   );
 }
 
-export default TouchMeNotBase;
+const mapDispatchToProps = (dispatch) => ({
+  setGesture: (gesture) => dispatch(setGesture(gesture)),
+  setFingerLocx: (gesture) => dispatch(setFingerLocx(gesture)),
+})
+
+export default connect(null, mapDispatchToProps)(TouchMeNotBase);
