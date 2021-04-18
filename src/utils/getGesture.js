@@ -1,23 +1,30 @@
-function dist(a, b) {
-  return Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2));
-}
-
 function getGesture(landmarks) {
+  let thumbIsOpen = false;
+  let firstFingerIsOpen = false;
+  let secondFingerIsOpen = false;
+  let thirdFingerIsOpen = false;
+  let pinkyIsOpen = false;
+
+  if (landmarks[3].x < landmarks[2].x && landmarks[4].x < landmarks[2].x)
+    thumbIsOpen = true;
+  if (landmarks[7].y < landmarks[6].y && landmarks[8].y < landmarks[6].y)
+    firstFingerIsOpen = true;
+  if (landmarks[11].y < landmarks[10].y && landmarks[12].y < landmarks[10].y)
+    secondFingerIsOpen = true;
+  if (landmarks[15].y < landmarks[14].y && landmarks[16].y < landmarks[14].y)
+    thirdFingerIsOpen = true;
+  if (landmarks[19].y < landmarks[18].y && landmarks[19].y < landmarks[18].y)
+    pinkyIsOpen = true;
+
   if (
-    dist(landmarks[5], landmarks[8]) +
-      dist(landmarks[9], landmarks[12]) +
-      dist(landmarks[13], landmarks[16]) +
-      dist(landmarks[17], landmarks[20]) +
-      Math.min(
-        dist(landmarks[4], landmarks[5]),
-        dist(landmarks[4], landmarks[9]),
-        dist(landmarks[4], landmarks[13]),
-        dist(landmarks[4], landmarks[17])
-      ) <
-    0.2
+    !thumbIsOpen &&
+    !firstFingerIsOpen &&
+    !secondFingerIsOpen &&
+    !thirdFingerIsOpen &&
+    !pinkyIsOpen
   )
     return "GRAB";
-  return "HOVER";
+  else return "HOVER";
 }
 
 export default getGesture;
