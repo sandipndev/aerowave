@@ -21,6 +21,7 @@ function Notify(props) {
             setStatus("no");
         }, 500);
         setLastTime(i);
+    // eslint-disable-next-line
     }, [props.gesture, props.finger_locx, setStatus, setLastTime]);
 
     if (!props.loaded) return <></>;

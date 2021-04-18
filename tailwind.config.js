@@ -9,6 +9,9 @@ module.exports = {
       filter: {
         "grayscale-80": "grayscale(80%)",
       },
+      boxShadow: {
+        blue: "0 4px 14px 0 rgba(19, 51, 81, 0.39)",
+      },
     },
   },
   variants: {

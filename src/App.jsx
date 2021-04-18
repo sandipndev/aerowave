@@ -5,12 +5,12 @@ import UI from "./components/UI";
 
 function App() {
   return (
-    <div className="bg-gray-800 w-screen h-screen">
-      <TouchMeNotBase />
-      <GestureButton />
-      <Notify />
-      <UI />
-    </div>
+      <div className="bg-gray-800 w-screen h-screen">
+        <TouchMeNotBase />
+        <GestureButton />
+        <Notify />
+        <UI />
+      </div>
   );
 }
 

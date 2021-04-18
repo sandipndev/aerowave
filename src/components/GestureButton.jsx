@@ -12,7 +12,6 @@ function GestureButton(props) {
     cursorRef.current.style.top = props.finger_locx[8].y * window.innerHeight + "px";
 
     const i = setTimeout(() => {
-        console.log("HOLA");
         cursorRef.current.style.display = "none";
     }, 500);
 
@@ -20,11 +19,12 @@ function GestureButton(props) {
     if (getPrevInterval()) clearTimeout(getPrevInterval());
     setCurrInterval(i);
 
+    // eslint-disable-next-line
   }, [props.finger_locx, setCurrInterval]);
 
   let bg = "bg-white";
-  if (props.gesture && props.gesture[0] == "C") bg = "bg-green-500";
-  else if (props.gesture && props.gesture[0] == "G") bg = "bg-blue-500";
+  if (props.gesture && props.gesture[0] === "C") bg = "bg-green-500";
+  else if (props.gesture && props.gesture[0] === "G") bg = "bg-blue-500";
 
   return (
   <div 
