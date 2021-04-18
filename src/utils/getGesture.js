@@ -24,6 +24,13 @@ function getGesture(landmarks) {
     !pinkyIsOpen
   )
     return "GRAB";
+  else if (
+    Math.sqrt(
+      Math.pow(landmarks[4].x - landmarks[8].x, 2) +
+        Math.sqrt(Math.pow(landmarks[4].y - landmarks[8].y, 2))
+    ) < 0.25
+  )
+    return "CLICK";
   else return "HOVER";
 }
 
