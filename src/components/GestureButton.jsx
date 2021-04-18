@@ -14,7 +14,7 @@ function GestureButton(props) {
     const i = setTimeout(() => {
         console.log("HOLA");
         cursorRef.current.style.display = "none";
-    }, 2000);
+    }, 500);
 
     const getPrevInterval = () => prevInterval;
     if (getPrevInterval()) clearTimeout(getPrevInterval());

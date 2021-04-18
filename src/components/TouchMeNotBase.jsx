@@ -7,7 +7,7 @@ import { Camera } from "@mediapipe/camera_utils/camera_utils";
 import { drawConnectors, drawLandmarks } from "@mediapipe/drawing_utils/drawing_utils";
 import "@mediapipe/control_utils/control_utils";
 
-import { setGesture, setFingerLocx } from "../redux/gesture/gesture.actions";
+import { setGesture, setFingerLocx, setLoaded } from "../redux/gesture/gesture.actions";
 import getGesture from "../utils/getGesture";
 
 function TouchMeNotBase(props) {
@@ -26,6 +26,7 @@ function TouchMeNotBase(props) {
     const ctx = cnvs.getContext("2d");
 
     const onResults = (res) => {
+      props.setLoaded();
       ctx.save();
       ctx.clearRect(0, 0, cnvs.width, cnvs.height);
       ctx.drawImage(res.image, 0, 0, cnvs.width, cnvs.height);
@@ -72,7 +73,7 @@ function TouchMeNotBase(props) {
   }, []);
 
   return (
-    <div className="absolute top-0 filter filter-grayscale-80">
+    <div className="absolute top-0 filter filter-grayscale-80 opacity-10">
       <canvas className="transform scale-x-minus-1" ref={canvasRef} />
     </div>
   );
@@ -85,6 +86,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setGesture: (gesture) => dispatch(setGesture(gesture)),
   setFingerLocx: (gesture) => dispatch(setFingerLocx(gesture)),
+  setLoaded: () => dispatch(setLoaded()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TouchMeNotBase);
