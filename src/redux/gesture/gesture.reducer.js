@@ -2,6 +2,7 @@ import { SET_GESTURE, SET_FINGER_LOCX } from "./gesture.types";
 
 const initialState = {
   gesture: null,
+  finger_locx: null,
 };
 
 const gestureReducer = (state = initialState, action) => {

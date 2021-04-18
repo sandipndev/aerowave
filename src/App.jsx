@@ -1,14 +1,12 @@
 import TouchMeNotBase from "./components/TouchMeNotBase";
-import View from "./components/View";
+import GestureButton from "./components/GestureButton";
 
 function App() {
   return (
-    <>
+    <div>
       <TouchMeNotBase />
-      <div className="absolute">
-        <View />
-      </div>
-    </>
+      <GestureButton />
+    </div>
   );
 }
 

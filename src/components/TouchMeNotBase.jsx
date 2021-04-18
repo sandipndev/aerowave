@@ -18,8 +18,8 @@ function TouchMeNotBase(props) {
 
     hands.setOptions({
       maxNumHands: 1,
-      minDetectionConfidence: 0.3,
-      minTrackingConfidence: 0.3
+      minDetectionConfidence: 0.5,
+      minTrackingConfidence: 0.5
     });
 
     const cnvs = canvasRef.current;
@@ -58,7 +58,7 @@ function TouchMeNotBase(props) {
     });
 
     camera.start();
-
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -72,7 +72,7 @@ function TouchMeNotBase(props) {
   }, []);
 
   return (
-    <div className="absolute top-0">
+    <div className="absolute top-0 filter filter-grayscale-80">
       <canvas className="transform scale-x-minus-1" ref={canvasRef} />
     </div>
   );

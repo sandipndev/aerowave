@@ -6,10 +6,13 @@ module.exports = {
       scale: {
         "minus-1": "-1",
       },
+      filter: {
+        "grayscale-80": "grayscale(80%)",
+      },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("tailwindcss-filters")],
 };
